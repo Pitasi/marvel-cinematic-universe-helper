@@ -1,0 +1,14 @@
+{
+  "name": "marvel_cinematic",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "^1.4.0",
+    "angular-route": "^1.5.3",
+    "angular-resource": "^1.5.5",
+    "Materialize": "materialize#^0.97.6"
+  },
+  "devDependencies": {},
+  "appPath": "app",
+  "moduleName": "marvel_cinematic",
+  "overrides": {}
+}

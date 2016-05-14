@@ -1,0 +1,47 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+html, body {
+  background-color: #fafafa;
+  padding: 0;
+  margin: 0;
+}
+.card .card-image .card-title {
+  text-shadow: -1px 0 5px rgba(0, 0, 0, 0.3), 0 1px 5px rgba(0, 0, 0, 0.3), 1px 0 5px rgba(0, 0, 0, 0.3), 0 -1px 5px rgba(0, 0, 0, 0.3);
+}
+.card-caption {
+  display: block;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+}
+.chip {
+  margin-right: 4px;
+}
+.zoom_img {
+  overflow:hidden;
+  line-height: 0;
+}
+.zoom_img img{
+  -moz-transition:-moz-transform 0.2s ease-in;
+  -webkit-transition:-webkit-transform 0.2s ease-in;
+  -o-transition:-o-transform 0.2s ease-in;
+}
+.zoom_img img:hover{
+  -moz-transform:scale(1.1);
+  -webkit-transform:scale(1.1);
+  -o-transform:scale(1.1);
+}
+
+.caption {
+  font-size: 1.25rem;
+  font-weight: 300;
+  margin-bottom: 30px;
+}
