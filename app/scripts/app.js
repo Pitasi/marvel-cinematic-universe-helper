@@ -20,7 +20,7 @@ app.constant('$globals', {
     },
     'footer_text': {
       'en': 'This website shows some useful informations to guide you through the huuuge list of movies made by Marvel Studios.',
-      'it': 'Questo sito web mostra alcune informazioni utile per guidarti all\'interno del gigantesco universo creato dai Marvel Studio'
+      'it': "Questo sito web mostra alcune informazioni utile per guidarti all'interno del gigantesco universo creato dai Marvel Studio"
     }
   },
   languages: ['en', 'it']
@@ -32,6 +32,10 @@ app.config(function ($routeProvider) {
     .when('/', {
       templateUrl: 'views/home.html',
       controller: 'MainController'
+    })
+    .when('/404', {
+      redirectTo: '/'
+    // templateUrl: 'views/404.html'
     })
     .when('/:ln/', {
       templateUrl: 'views/home.html',
@@ -66,14 +70,14 @@ app.controller('MainController', function ($scope, $globals, $routeParams, $loca
   $scope.read_more = $globals.strings.read_more[ln]
   $scope.footer_text = $globals.strings.footer_text[ln]
 
-  $http.get('/res/movies_' + ln + '.json').success(function (data){
+  $http.get('/res/movies_' + ln + '.json').success(function (data) {
     var movies = data
     angular.forEach(movies, function (obj, key) {
       console.log('Loading movie: ' + key)
       obj['backdrop_path'] = 'https://image.tmdb.org/t/p/w600/' + obj['backdrop_path']
       $scope.movies_list.push(obj)
     })
-  });
+  })
 })
 
 app.controller('MovieController', function ($scope, $globals, $routeParams, $location, $http) {
@@ -86,12 +90,12 @@ app.controller('MovieController', function ($scope, $globals, $routeParams, $loc
   $scope.footer_text = $globals.strings.footer_text[ln]
   $scope.imdb_text = $globals.strings.imdb_text[ln]
 
-  $http.get('/res/movies_' + ln + '.json').success(function (data){
+  $http.get('/res/movies_' + ln + '.json').success(function (data) {
     var movies = data
     $scope.genres_list = []
     if (movies[id] !== undefined) {
       var obj = movies[id]
-      angular.forEach(obj.genres, function(k){
+      angular.forEach(obj.genres, function (k) {
         $scope.genres_list.push(k.name)
       })
       $scope.title = obj.title
@@ -102,6 +106,5 @@ app.controller('MovieController', function ($scope, $globals, $routeParams, $loc
       $scope.imdb_link = 'http://www.imdb.com/title/' + obj.imdb_id
     }
     else $location.path('/404')
-
-  });
+  })
 })

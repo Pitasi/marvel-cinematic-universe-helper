@@ -7,7 +7,7 @@
         <h3>{{main_title}}</h3>
         <div class="col s12 m6" ng-repeat="movie in movies_list | orderBy:'+order'">
 
-          <div ng-if="$odd" class="card medium hoverable">
+          <div ng-if="$odd" class="card hoverable">
             <div class="card-image">
               <img src="{{movie.backdrop_path}}">
               <span class="card-title">{{movie.order}}) {{movie.title}}</span>
@@ -20,7 +20,7 @@
             </div>
           </div>
 
-          <div ng-if="$even" class="card medium hoverable">
+          <div ng-if="$even" class="card hoverable">
             <div class="card-image">
               <img src="{{movie.backdrop_path}}">
               <span class="card-title">{{movie.order}}) {{movie.title}}</span>
