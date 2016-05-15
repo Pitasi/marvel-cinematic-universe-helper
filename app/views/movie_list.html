@@ -26,10 +26,10 @@
             </div>
           </div>-->
 
-          <div class="card" >
+          <div class="card" ng-class="{disabled: movie.viewed}">
             <div class="card-image waves-effect waves-block waves-light">
               <img class="activator" src="{{movie.backdrop_path}}">
-              <span class="card-title activator">{{movie.order}}. {{movie.title}}</span>
+              <span class="card-title activator">{{movie.order}}. {{movie.title}}  <i ng-if="movie.viewed" class="material-icons">done</i></span>
 
             </div>
             <div class="readmore"></div>
@@ -38,11 +38,14 @@
               <p>{{movie.overview}}/p>
             </div>
             <div class="card-reveal">
-              <span class="card-title"><i class="material-icons right">close</i> {{movie.title}}</span>
+              <span class="card-title"><i class="material-icons right">close</i> {{movie.title}} <i ng-if="movie.viewed" class="material-icons">done</i></span>
+              <br />
+              <div class="divider"></div>
               <br />
               <a class="red waves-effect waves-light btn" href="#/movie/{{list}}/{{movie.id}}/{{ln}}">{{read_more}}</a>
               <br /><br />
-              <a class="red disabled waves-effect waves-light btn" href="#/list/xmen/{{ln}}">Mark as view</a>
+              <a ng-if="!movie.viewed" ng-click="mark(movie, true)" class="red waves-effect waves-light btn" href="javascript:void(0)">Mark as viewed</a>
+              <a ng-if="movie.viewed" ng-click="mark(movie, false)" class="red waves-effect waves-light btn" href="javascript:void(0)">Mark as not viewed</a>
             </div>
           </div>
 

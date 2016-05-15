@@ -29,7 +29,7 @@ html, body {
 }
 .readmore {
   background-image: linear-gradient(to bottom, transparent, #FFFFFF);
-  z-index: 9999;
+  z-index: 1;
   width: 100%;
   height: 100px;
   position: absolute;
@@ -37,6 +37,9 @@ html, body {
 }
 .card-reveal a {
   width: 100%;
+}
+.card.disabled{
+  opacity: 0.5;
 }
 .chip {
   margin-right: 4px;

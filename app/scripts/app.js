@@ -1,6 +1,6 @@
 'use strict'
 
-var app = angular.module('marvel_cinematic', ['ngRoute', 'ngResource'])
+var app = angular.module('marvel_cinematic', ['ngRoute', 'ngResource', 'ngCookies'])
 
 app.constant('$globals', {
   api_key: '032c03fbcaf94c05b55ddf4ec973ad16',
@@ -93,10 +93,16 @@ app.controller('HomeController', function ($scope, $globals, $routeParams, $loca
   $scope.italian_path = '#' + $location.path().replace('/' + ln, '/it')
 })
 // This controls movie_list.html
-app.controller('MainController', function ($scope, $globals, $routeParams, $location, $http) {
-  $scope.go = function (p) { $location.path(p) }
-
+app.controller('MainController', function ($scope, $globals, $routeParams, $location, $http, $cookies) {
   $scope.movies_list = []
+
+  $scope.go = function (p) { $location.path(p) }
+  $scope.mark = function(p, v) {
+    $cookies.put(p.id, v);
+    p.viewed = v
+    Materialize.toast('Done!', 2000)
+  }
+
   var list = $routeParams.list
   $scope.list = list
   console.log(list)
@@ -108,20 +114,25 @@ app.controller('MainController', function ($scope, $globals, $routeParams, $loca
   $scope.main_title = $globals.strings.main_title[ln]
   $scope.read_more = $globals.strings.read_more[ln]
   $scope.footer_text = $globals.strings.footer_text[ln]
+  $scope.main_list = $globals.strings.main_list[ln]
+  $scope.xmen_list = $globals.strings.xmen_list[ln]
   $scope.english_path = '#' + $location.path().replace('/' + ln, '/en')
   $scope.italian_path = '#' + $location.path().replace('/' + ln, '/it')
 
   $http.get('/res/' + list + '_' + ln + '.json').success(function (data) {
     var movies = data
+    var v
     angular.forEach(movies, function (obj, key) {
       console.log('Loading movie: ' + key)
+      v = $cookies.get(key)
+      obj['viewed'] = v === 'true'
       obj['backdrop_path'] = 'https://image.tmdb.org/t/p/w600/' + obj['backdrop_path']
       $scope.movies_list.push(obj)
     })
   })
 })
 
-app.controller('MovieController', function ($scope, $globals, $routeParams, $location, $http) {
+app.controller('MovieController', function ($scope, $globals, $routeParams, $location, $http, $cookies) {
   var languages = $globals.languages
   var list = $routeParams.list
   var id = $routeParams.id
@@ -131,6 +142,8 @@ app.controller('MovieController', function ($scope, $globals, $routeParams, $loc
   $scope.ln = ln
   $scope.footer_text = $globals.strings.footer_text[ln]
   $scope.imdb_text = $globals.strings.imdb_text[ln]
+  $scope.main_list = $globals.strings.main_list[ln]
+  $scope.xmen_list = $globals.strings.xmen_list[ln]
   $scope.english_path = '#' + $location.path().replace('/' + ln, '/en')
   $scope.italian_path = '#' + $location.path().replace('/' + ln, '/it')
 

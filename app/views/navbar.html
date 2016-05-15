@@ -2,8 +2,8 @@
   <div class="nav-wrapper container">
     <a href="#/{{ln}}" class="brand-logo">Marvel Movies</a>
     <ul class="right hide-on-med-and-down">
-      <li><a href="{{english_path}}">{{main_list}}</a></li>
-      <li><a href="{{english_path}}">{{xmen_list}}</a></li>
+      <li><a href="#/list/main/{{ln}}">{{main_list}}</a></li>
+      <li><a href="#/list/xmen/{{ln}}">{{xmen_list}}</a></li>
 
       <li ng-if="ln != 'en'"><a href="{{english_path}}">English</a></li>
       <li ng-if="ln != 'it'"><a href="{{italian_path}}">Italiano</a></li>
@@ -15,8 +15,8 @@
         <h4 class="grey-text text-darken-4">Men&ugrave;</h4>
         <div class="divider"></div>
       </div>
-      <li><a href="{{english_path}}">{{main_list}}</a></li>
-      <li><a href="{{english_path}}">{{xmen_list}}</a></li>
+      <li><a href="#/list/main/{{ln}}">{{main_list}}</a></li>
+      <li><a href="#/list/xmen/{{ln}}">{{xmen_list}}</a></li>
 
       <li ng-if="ln != 'en'"><a href="{{english_path}}">English</a></li>
       <li ng-if="ln != 'it'"><a href="{{italian_path}}">Italiano</a></li>
