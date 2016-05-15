@@ -36,7 +36,7 @@ app.constant('$globals', {
     },
     'footer_text': {
       'en': 'This website shows some useful informations to guide you through the huuuge list of movies made by Marvel Studios.',
-      'it': 'Questo sito web mostra alcune informazioni utile per guidarti all\'interno del gigantesco universo creato dai Marvel Studio.'
+      'it': "Questo sito web mostra alcune informazioni utile per guidarti all'interno del gigantesco universo creato dai Marvel Studio."
     }
   },
   languages: ['en', 'it']
@@ -49,7 +49,7 @@ app.config(function ($routeProvider) {
       redirectTo: '/en'
     })
     .when('/404', {
-      //redirectTo: '/'
+      // redirectTo: '/'
       templateUrl: 'views/404.html'
     })
     .when('/:ln/', {
@@ -76,7 +76,7 @@ app.config(function ($routeProvider) {
 })
 
 // This controls home.html
-app.controller('HomeController', function($scope, $globals, $routeParams, $location) {
+app.controller('HomeController', function ($scope, $globals, $routeParams, $location) {
   var languages = $globals.languages
   var ln = $routeParams.ln
   if (ln === undefined) ln = 'en'
@@ -91,12 +91,10 @@ app.controller('HomeController', function($scope, $globals, $routeParams, $locat
 
   $scope.english_path = '#' + $location.path().replace('/' + ln, '/en')
   $scope.italian_path = '#' + $location.path().replace('/' + ln, '/it')
-
-
 })
 // This controls movie_list.html
 app.controller('MainController', function ($scope, $globals, $routeParams, $location, $http) {
-$scope.go = function (p) { console.log(p); $location.path(p); }
+  $scope.go = function (p) { $location.path(p) }
 
   $scope.movies_list = []
   var list = $routeParams.list
@@ -144,10 +142,8 @@ app.controller('MovieController', function ($scope, $globals, $routeParams, $loc
       angular.forEach(obj.genres, function (k) {
         $scope.genres_list.push(k.name)
       })
-      if (obj.next !== undefined)
-        $scope.next = '#/movie/' + list + '/' + obj.next + '/' + ln
-        if (obj.previous !== undefined)
-          $scope.previous = '#/movie/' + list + '/' + obj.previous + '/' + ln
+      if (obj.next !== undefined) $scope.next = '#/movie/' + list + '/' + obj.next + '/' + ln
+      if (obj.previous !== undefined) $scope.previous = '#/movie/' + list + '/' + obj.previous + '/' + ln
       $scope.order = obj.order
       $scope.title = obj.title
       $scope.poster = 'https://image.tmdb.org/t/p/w600/' + obj.poster_path
