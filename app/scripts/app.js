@@ -166,7 +166,7 @@ app.controller('MovieController', function ($scope, $globals, $routeParams, $loc
   $scope.imdb_text = $globals.strings.imdb_text[ln]
   $scope.main_list = $globals.strings.main_list[ln]
   $scope.xmen_list = $globals.strings.xmen_list[ln]
-  $scope.is_viewed = $cookies.get(id)
+  $scope.is_viewed = $cookies.get(id) === 'true'
   $scope.english_path = '#' + $location.path().replace('/' + ln, '/en')
   $scope.italian_path = '#' + $location.path().replace('/' + ln, '/it')
 
