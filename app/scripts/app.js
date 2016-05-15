@@ -16,11 +16,11 @@ app.constant('$globals', {
     },
     'main_list': {
       'en': 'Main movies list',
-      'it': 'Lista dei film principali'
+      'it': 'Lista film principali'
     },
     'xmen_list': {
       'en': 'X-Men movies list',
-      'it': 'Lista dei film sugli X-Men'
+      'it': 'Lista film X-Men'
     },
     'main_title': {
       'en': 'Suggested order',
