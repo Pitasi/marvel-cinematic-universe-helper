@@ -30,6 +30,22 @@ app.constant('$globals', {
       'en': 'See more',
       'it': 'Leggi di più'
     },
+    'mark': {
+      'en': 'Mark as ',
+      'it': 'Segna come '
+    },
+    'marked': {
+      'en': 'Marked as ',
+      'it': 'Segnato come '
+    },
+    'viewed': {
+      'en': 'watched',
+      'it': 'visto'
+    },
+    'unviewed': {
+      'en': 'unwatched',
+      'it': 'non visto'
+    },
     'imdb_text': {
       'en': 'View it on IMdB',
       'it': 'Aprilo in IMdB'
@@ -49,8 +65,10 @@ app.config(function ($routeProvider) {
       redirectTo: '/en'
     })
     .when('/404', {
-      // redirectTo: '/'
       templateUrl: 'views/404.html'
+    })
+    .when('/about', {
+      templateUrl: 'views/about.html'
     })
     .when('/:ln/', {
       templateUrl: 'views/home.html',
@@ -96,13 +114,6 @@ app.controller('HomeController', function ($scope, $globals, $routeParams, $loca
 app.controller('MainController', function ($scope, $globals, $routeParams, $location, $http, $cookies) {
   $scope.movies_list = []
 
-  $scope.go = function (p) { $location.path(p) }
-  $scope.mark = function(p, v) {
-    $cookies.put(p.id, v);
-    p.viewed = v
-    Materialize.toast('Done!', 2000)
-  }
-
   var list = $routeParams.list
   $scope.list = list
   console.log(list)
@@ -110,12 +121,23 @@ app.controller('MainController', function ($scope, $globals, $routeParams, $loca
   var ln = $routeParams.ln
   if (ln === undefined) ln = 'en'
   if (languages.indexOf(ln) === -1) $location.path('/404')
+
+  $scope.go = function (p) { $location.path(p) }
+  $scope.mark_movie = function(p, v) {
+    $cookies.put(p.id, v);
+    p.viewed = v
+    Materialize.toast($globals.strings.marked[ln] + (v ? $globals.strings.viewed[ln] : $globals.strings.unviewed[ln]) + '!', 2000)
+  }
+
   $scope.ln = ln
   $scope.main_title = $globals.strings.main_title[ln]
   $scope.read_more = $globals.strings.read_more[ln]
   $scope.footer_text = $globals.strings.footer_text[ln]
   $scope.main_list = $globals.strings.main_list[ln]
   $scope.xmen_list = $globals.strings.xmen_list[ln]
+  $scope.mark = $globals.strings.mark[ln]
+  $scope.viewed = $globals.strings.viewed[ln]
+  $scope.unviewed = $globals.strings.unviewed[ln]
   $scope.english_path = '#' + $location.path().replace('/' + ln, '/en')
   $scope.italian_path = '#' + $location.path().replace('/' + ln, '/it')
 
@@ -144,8 +166,15 @@ app.controller('MovieController', function ($scope, $globals, $routeParams, $loc
   $scope.imdb_text = $globals.strings.imdb_text[ln]
   $scope.main_list = $globals.strings.main_list[ln]
   $scope.xmen_list = $globals.strings.xmen_list[ln]
+  $scope.is_viewed = $cookies.get(id)
   $scope.english_path = '#' + $location.path().replace('/' + ln, '/en')
   $scope.italian_path = '#' + $location.path().replace('/' + ln, '/it')
+
+  $scope.mark_movie = function(p, v) {
+    $cookies.put(p, v);
+    $scope.is_viewed = v
+    Materialize.toast($globals.strings.marked[ln] + (v ? $globals.strings.viewed[ln] : $globals.strings.unviewed[ln]) + '!', 2000)
+  }
 
   $http.get('/res/' + list + '_' + ln + '.json').success(function (data) {
     var movies = data
@@ -157,6 +186,7 @@ app.controller('MovieController', function ($scope, $globals, $routeParams, $loc
       })
       if (obj.next !== undefined) $scope.next = '#/movie/' + list + '/' + obj.next + '/' + ln
       if (obj.previous !== undefined) $scope.previous = '#/movie/' + list + '/' + obj.previous + '/' + ln
+      $scope.id = obj.id
       $scope.order = obj.order
       $scope.title = obj.title
       $scope.poster = 'https://image.tmdb.org/t/p/w600/' + obj.poster_path

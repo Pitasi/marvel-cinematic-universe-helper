@@ -16,7 +16,7 @@
        <div class="col s12 m7">
          <div ng-repeat="genre in genres_list" class="chip">{{genre}}</div>
 
-         <h3 class="header">{{order}}. {{title}}</h3>
+         <h3 class="header">{{order}}. {{title}} <i ng-if="is_viewed" class="material-icons">done</i></h3>
          <h5 class="light">{{tagline}}</h5>
          <div class="divider"></div>
          <p class="caption light">{{plot}}</p>
@@ -28,7 +28,18 @@
          </div>
 
        </div>
+
      </div>
+
+      <div class="fixed-action-btn" style="bottom: 70px; right: 48px;">
+        <a ng-click="mark_movie(id, true)" ng-if="!is_viewed" class="btn-floating btn-large red">
+          <i class="material-icons">add</i>
+          <i class="material-icons">remove</i>
+        </a>
+        <a ng-click="mark_movie(id, false)" ng-if="is_viewed" class="btn-floating btn-large red">
+          <i class="material-icons">remove</i>
+        </a>
+      </div>
 
    </div>
    <br><br>
