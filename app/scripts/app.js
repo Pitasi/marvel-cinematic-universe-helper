@@ -34,8 +34,8 @@ app.config(function ($routeProvider) {
       controller: 'MainController'
     })
     .when('/404', {
-      redirectTo: '/'
-    // templateUrl: 'views/404.html'
+      //redirectTo: '/'
+      templateUrl: 'views/404.html'
     })
     .when('/:ln/', {
       templateUrl: 'views/home.html',
@@ -54,7 +54,7 @@ app.config(function ($routeProvider) {
       controller: 'MovieController'
     })
     .otherwise({
-      redirectTo: '/'
+      redirectTo: '/404'
     })
 })
 
