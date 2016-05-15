@@ -21,6 +21,7 @@ html, body {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
+  max-height: 70px;
 }
 .chip {
   margin-right: 4px;
