@@ -2,13 +2,13 @@
   <div class="nav-wrapper container">
     <a href="#/{{ln}}" class="brand-logo">Marvel Movies</a>
     <ul class="right hide-on-med-and-down">
-      <li ng-if="ln != 'en'"><a href="#/en">English</a></li>
-      <li ng-if="ln != 'it'"><a href="#/it">Italiano</a></li>
+      <li ng-if="ln != 'en'"><a href="{{english_path}}">English</a></li>
+      <li ng-if="ln != 'it'"><a href="{{italian_path}}">Italiano</a></li>
       <li><a href="#/about">About</a></li>
     </ul>
     <ul id="nav-mobile" class="side-nav">
-      <li ng-if="ln != 'en'"><a href="#/en">English</a></li>
-      <li ng-if="ln != 'it'"><a href="#/it">Italiano</a></li>
+      <li ng-if="ln != 'en'"><a href="{{english_path}}">English</a></li>
+      <li ng-if="ln != 'it'"><a href="{{italian_path}}">Italiano</a></li>
       <li><a href="#/about">About</a></li>
     </ul>
     <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>

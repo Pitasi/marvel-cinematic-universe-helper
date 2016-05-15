@@ -4,23 +4,29 @@
  <div class="container" ng-controller="MovieController">
    <div class="section">
      <div class="row">
-       <div class="col s12 m8">
-         <div ng-repeat="genre in genres_list" class="chip">{{genre}}</div>
-
-         <h3 class="header">{{title}}</h3>
-         <h5 class="light">{{tagline}}</h5>
-           <br />
-         <p class="caption light">{{plot}}</p>
-
-         <a target="_blank" href="{{imdb_link}}" class="darken-3 red waves-effect waves-light btn-large">{{imdb_text}}</a>
-
-       </div>
        <div class="col s12 m4">
          <div class="z-depth-2 zoom_img">
            <a target="_blank" href="{{poster_large}}">
              <img class="responsive-img" src="{{poster}}" />
            </a>
          </div>
+         <br /><br />
+       </div>
+       <div class="col s12 m1 l1">&nbsp;</div>
+       <div class="col s12 m7">
+         <div ng-repeat="genre in genres_list" class="chip">{{genre}}</div>
+
+         <h3 class="header">{{title}}</h3>
+         <h5 class="light">{{tagline}}</h5>
+         <div class="divider"></div>
+         <p class="caption light">{{plot}}</p>
+
+         <div class="row center">
+           <a ng-if="previous !== undefined" href="{{previous}}" class="darken-3 red waves-effect waves-light btn-large"><i class="large material-icons">keyboard_arrow_left</i></a>
+           <a target="_blank" href="{{imdb_link}}" class="darken-3 red waves-effect waves-light btn-large">{{imdb_text}}</a>
+           <a ng-if="next !== undefined" href="{{next}}" class="darken-3 red waves-effect waves-light btn-large"><i class="large material-icons">keyboard_arrow_right</i></a>
+         </div>
+
        </div>
      </div>
 

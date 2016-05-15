@@ -1,39 +1,17 @@
 <div ng-include="'views/navbar.html'"></div>
 
  <div class="section no-pad-bot" id="index-banner">
-  <div class="container" ng-controller="MainController">
+  <div class="container">
     <div class="section">
       <div class="row">
-        <h3>{{main_title}}</h3>
-        <div class="col s12 m6" ng-repeat="movie in movies_list | orderBy:'+order'">
-
-          <div ng-if="$odd" class="card hoverable">
-            <div class="card-image">
-              <img src="{{movie.backdrop_path}}">
-              <span class="card-title">{{movie.order}}) {{movie.title}}</span>
-            </div>
-            <div class="card-content">
-              <p class="card-caption light">{{movie.overview}}</p>
-            </div>
-            <div class="card-action">
-              <a href="#/movie/{{movie.id}}/{{ln}}">{{read_more}}</a>
-            </div>
-          </div>
-
-          <div ng-if="$even" class="card hoverable">
-            <div class="card-image">
-              <img src="{{movie.backdrop_path}}">
-              <span class="card-title">{{movie.order}}) {{movie.title}}</span>
-            </div>
-            <div class="card-content ">
-              <p class="card-caption light">{{movie.overview}}</p>
-            </div>
-            <div class="card-action">
-              <a href="#/movie/{{movie.id}}/{{ln}}">{{read_more}}</a>
-            </div>
-          </div>
-
-        </div>
+        <h3>{{home_title}}</h3>
+        <h5 class="light">{{home_subtitle}}</h5>
+        <div class="divider"></div>
+      </div>
+      <div class="row">
+        <a class="red waves-effect waves-light btn-large" href="#/list/main/{{ln}}">{{main_list}}</a>
+        <br /><br /><br />
+        <a class="red waves-effect waves-light btn-large" href="#/list/xmen/{{ln}}">{{xmen_list}}</a>
       </div>
     </div>
     <br><br>
