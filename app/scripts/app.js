@@ -148,6 +148,7 @@ app.controller('MovieController', function ($scope, $globals, $routeParams, $loc
         $scope.next = '#/movie/' + list + '/' + obj.next + '/' + ln
         if (obj.previous !== undefined)
           $scope.previous = '#/movie/' + list + '/' + obj.previous + '/' + ln
+      $scope.order = obj.order
       $scope.title = obj.title
       $scope.poster = 'https://image.tmdb.org/t/p/w600/' + obj.poster_path
       $scope.poster_large = 'https://image.tmdb.org/t/p/w1000/' + obj.poster_path
