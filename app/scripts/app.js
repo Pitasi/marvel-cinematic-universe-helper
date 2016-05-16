@@ -62,8 +62,9 @@ app.constant('$globals', {
 
 // Basic url routing
 app.config(function ($routeProvider, AnalyticsProvider) {
+  // Set a single account with all properties defined
+  // Universal Analytics only
   AnalyticsProvider.setAccount('UA-45070618-4');
-  AnalyticsProvider.trackUrlParams(true);
   AnalyticsProvider.readFromRoute(true);
 
   $routeProvider
@@ -98,6 +99,8 @@ app.config(function ($routeProvider, AnalyticsProvider) {
       redirectTo: '/404'
     })
 })
+
+app.run(function(Analytics) { })
 
 // This controls home.html
 app.controller('HomeController', function ($scope, $globals, $routeParams, $location) {
