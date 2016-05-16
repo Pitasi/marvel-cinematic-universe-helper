@@ -1,12 +1,17 @@
 'use strict'
 
-var app = angular.module('marvel_cinematic', ['ngRoute', 'ngResource', 'ngCookies'])
+var app = angular.module('marvel_cinematic', ['ngRoute', 'ngResource', 'ngCookies', 'angular-google-analytics'])
+
+app.config(function (AnalyticsProvider) {
+  AnalyticsProvider.setAccount('UA-45070618-4');
+});
 
 app.constant('$globals', {
   api_key: '032c03fbcaf94c05b55ddf4ec973ad16',
   endpoint: 'https://api.themoviedb.org/3/',
   cookie_name: 'cookie_agreement',
   available_lists: ['main', 'xmen'],
+  available_languages: ['en', 'it'],
   strings: {
     'home_title': {
       'en': 'Homepage',
@@ -56,8 +61,7 @@ app.constant('$globals', {
       'en': 'This website shows some useful informations to guide you through the huuuge list of movies made by Marvel Studios.',
       'it': "Questo sito web mostra alcune informazioni utile per guidarti all'interno del gigantesco universo creato dai Marvel Studio."
     }
-  },
-  languages: ['en', 'it']
+  }
 })
 
 // Basic url routing
@@ -97,7 +101,7 @@ app.config(function ($routeProvider) {
 
 // This controls home.html
 app.controller('HomeController', function ($scope, $globals, $routeParams, $location) {
-  var languages = $globals.languages
+  var languages = $globals.available_languages
   var ln = $routeParams.ln
   if (ln === undefined) ln = 'en'
   if (languages.indexOf(ln) === -1) $location.path('/404')
@@ -119,8 +123,7 @@ app.controller('MainController', function ($scope, $globals, $routeParams, $loca
   var list = $routeParams.list
   if ($globals.available_lists.indexOf(list) === -1) $location.path('/404')
   $scope.list = list
-  console.log(list)
-  var languages = $globals.languages
+  var languages = $globals.available_languages
   var ln = $routeParams.ln
   if (ln === undefined) ln = 'en'
   if (languages.indexOf(ln) === -1) $location.path('/404')
@@ -148,7 +151,6 @@ app.controller('MainController', function ($scope, $globals, $routeParams, $loca
     var movies = data
     var v
     angular.forEach(movies, function (obj, key) {
-      console.log('Loading movie: ' + key)
       v = $cookies.get(key)
       obj['viewed'] = v === 'true'
       obj['backdrop_path'] = 'https://image.tmdb.org/t/p/w600/' + obj['backdrop_path']
@@ -158,7 +160,7 @@ app.controller('MainController', function ($scope, $globals, $routeParams, $loca
 })
 
 app.controller('MovieController', function ($scope, $globals, $routeParams, $location, $http, $cookies) {
-  var languages = $globals.languages
+  var languages = $globals.available_languages
   var list = $routeParams.list
   var id = $routeParams.id
   var ln = $routeParams.ln

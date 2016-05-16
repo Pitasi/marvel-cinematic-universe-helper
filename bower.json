@@ -6,7 +6,8 @@
     "angular-route": "^1.5.3",
     "angular-resource": "^1.5.5",
     "Materialize": "materialize#^0.97.6",
-    "angular-cookies": "^1.5.5"
+    "angular-cookies": "^1.5.5",
+    "angular-google-analytics": "^1.1.7"
   },
   "devDependencies": {},
   "appPath": "app",
