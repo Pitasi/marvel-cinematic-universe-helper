@@ -6,6 +6,7 @@ app.constant('$globals', {
   api_key: '032c03fbcaf94c05b55ddf4ec973ad16',
   endpoint: 'https://api.themoviedb.org/3/',
   cookie_name: 'cookie_agreement',
+  available_lists: ['main', 'xmen'],
   strings: {
     'home_title': {
       'en': 'Homepage',
@@ -116,6 +117,7 @@ app.controller('MainController', function ($scope, $globals, $routeParams, $loca
   $scope.movies_list = []
 
   var list = $routeParams.list
+  if ($globals.available_lists.indexOf(list) === -1) $location.path('/404')
   $scope.list = list
   console.log(list)
   var languages = $globals.languages
