@@ -1,3 +1,21 @@
+<div ng-if="!accepted">
+  <div ng-controller="CookieController" id="modal1" class="modal bottom-sheet">
+    <div class="modal-content">
+      <h4>Cookie alert!</h4>
+      <p>
+        I know. You already saw warnings like me a hundred time. But the law is the law...<br />
+        Cookies are very small text files that are stored on your computer when you visit some websites.<br />
+        Staying here, you are agreeing to use cookies. If you don't, please disable cookies from your browser's settings.<br />
+        This website needs cookies to store your already watched movies and to gather some statistics about people visiting this site.
+        <a target="_blank" href="https://www.google.com/analytics/">Learn more about Google Analytics.</a>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <a href="javascript:void(0);" class=" modal-action modal-close waves-effect waves-red btn-flat">All right, stop bothering me and close this please.</a>
+    </div>
+  </div>
+</div>
+
 <footer class="red darken-3 page-footer">
   <div class="container">
     <div class="row">
@@ -19,3 +37,15 @@
     </div>
   </div>
 </footer>
+
+<script>
+  $('#modal1').leanModal({
+      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      opacity: .5, // Opacity of modal background
+      in_duration: 300, // Transition in duration
+      out_duration: 200, // Transition out duration
+      ready: function() { alert('Ready'); }, // Callback for Modal open
+      complete: function() { alert('Closed'); } // Callback for Modal close
+    }
+  );
+</script>

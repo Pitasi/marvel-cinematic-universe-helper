@@ -36,7 +36,8 @@
     "globals": [
       "angular",
       "$",
-      "jQuery"
+      "jQuery",
+      "Materialize"
     ]
   }
 }

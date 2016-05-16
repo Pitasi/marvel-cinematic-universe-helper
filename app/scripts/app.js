@@ -5,6 +5,7 @@ var app = angular.module('marvel_cinematic', ['ngRoute', 'ngResource', 'ngCookie
 app.constant('$globals', {
   api_key: '032c03fbcaf94c05b55ddf4ec973ad16',
   endpoint: 'https://api.themoviedb.org/3/',
+  cookie_name: 'cookie_agreement',
   strings: {
     'home_title': {
       'en': 'Homepage',
@@ -123,8 +124,8 @@ app.controller('MainController', function ($scope, $globals, $routeParams, $loca
   if (languages.indexOf(ln) === -1) $location.path('/404')
 
   $scope.go = function (p) { $location.path(p) }
-  $scope.mark_movie = function(p, v) {
-    $cookies.put(p.id, v);
+  $scope.mark_movie = function (p, v) {
+    $cookies.put(p.id, v)
     p.viewed = v
     Materialize.toast($globals.strings.marked[ln] + (v ? $globals.strings.viewed[ln] : $globals.strings.unviewed[ln]) + '!', 2000)
   }
@@ -170,8 +171,8 @@ app.controller('MovieController', function ($scope, $globals, $routeParams, $loc
   $scope.english_path = '#' + $location.path().replace('/' + ln, '/en')
   $scope.italian_path = '#' + $location.path().replace('/' + ln, '/it')
 
-  $scope.mark_movie = function(p, v) {
-    $cookies.put(p, v);
+  $scope.mark_movie = function (p, v) {
+    $cookies.put(p, v)
     $scope.is_viewed = v
     Materialize.toast($globals.strings.marked[ln] + (v ? $globals.strings.viewed[ln] : $globals.strings.unviewed[ln]) + '!', 2000)
   }
@@ -197,4 +198,21 @@ app.controller('MovieController', function ($scope, $globals, $routeParams, $loc
     }
     else $location.path('/404')
   })
+})
+
+app.controller('CookieController', function($scope, $cookies, $globals){
+  var cookie = $globals.cookie_name
+  var accepted = $cookies.get('cookie_agreement') === 'true'
+  $scope.accepted = accepted
+  var save_cookie = function() {
+    $cookies.put(cookie, true)
+    accepted = true
+    $scope.accepted = true
+  }
+  var opt = {
+      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      complete: save_cookie // Callback for Modal close
+    }
+  if (!accepted) $('#modal1').openModal(opt);
+
 })

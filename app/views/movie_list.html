@@ -44,13 +44,10 @@
               <br />
               <a class="red waves-effect waves-light btn" href="#/movie/{{list}}/{{movie.id}}/{{ln}}">{{read_more}}</a>
               <br /><br />
-              <a ng-if="!movie.viewed" ng-click="mark_movie(movie, true)" class="red waves-effect waves-light btn" href="javascript:void(0)">{{mark}}{{viewed}}</a>
-              <a ng-if="movie.viewed" ng-click="mark_movie(movie, false)" class="red waves-effect waves-light btn" href="javascript:void(0)">{{mark}}{{unviewed}}</a>
+              <a ng-if="!movie.viewed" ng-click="mark_movie(movie, true)" class="red waves-effect waves-light btn" href="javascript:void(0)">{{viewed}}</a>
+              <a ng-if="movie.viewed" ng-click="mark_movie(movie, false)" class="red waves-effect waves-light btn" href="javascript:void(0)">{{unviewed}}</a>
             </div>
           </div>
-
-
-
         </div>
 
       </div>
