@@ -2,10 +2,6 @@
 
 var app = angular.module('marvel_cinematic', ['ngRoute', 'ngResource', 'ngCookies', 'angular-google-analytics'])
 
-app.config(function (AnalyticsProvider) {
-  AnalyticsProvider.setAccount('UA-45070618-4');
-});
-
 app.constant('$globals', {
   api_key: '032c03fbcaf94c05b55ddf4ec973ad16',
   endpoint: 'https://api.themoviedb.org/3/',
@@ -65,7 +61,11 @@ app.constant('$globals', {
 })
 
 // Basic url routing
-app.config(function ($routeProvider) {
+app.config(function ($routeProvider, AnalyticsProvider) {
+  AnalyticsProvider.setAccount('UA-45070618-4');
+  AnalyticsProvider.trackUrlParams(true);
+  AnalyticsProvider.readFromRoute(true);
+
   $routeProvider
     .when('/', {
       redirectTo: '/en'
